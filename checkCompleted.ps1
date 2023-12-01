@@ -11,6 +11,6 @@ else {
     Import-Module ".\PowershellScripts\modules\error.psm1" -Force
 }
 
-$rootDirectory = "C:\CompletedFiles"
+# $rootDirectory = "C:\CompletedFiles"
 
 
