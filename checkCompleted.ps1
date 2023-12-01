@@ -11,6 +11,10 @@ else {
     Import-Module ".\PowershellScripts\modules\error.psm1" -Force
 }
 
-$rootDirectory = "C:\CompletedFiles"
+try{
+    $recentCompletedFiles = "C:\CompletedFiles" | Get-ChildItem -File | Where-Object { $_.CreationTime -lt (Get-Date).AddMinutes(-10) }
+    Write-Output $recentCompletedFiles.Length
 
-
+}catch{
+    Send-Error -ScriptName $MyInvocation.MyCommand.Name -ErrorParam "$($Error[0].Exception.Message)"
+}
