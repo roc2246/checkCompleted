@@ -21,7 +21,7 @@ try {
     $recentCompletedFiles = Get-ChildItem -Path $rootDirectory -File | Where-Object { $_.CreationTime -ge (Get-Date).AddHours(-$timespan) }
 
     if ($recentCompletedFiles.Count -eq 0) {
-        Find-Recent -Time $timespan 
+        Find-Recent -Time "$($timespan) hours"
     } 
 }
 catch {
