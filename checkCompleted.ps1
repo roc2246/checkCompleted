@@ -17,13 +17,15 @@ else {
 
 
 try {
-    $timespan = 3  
+    $timespan = 3
     $recentCompletedFiles = Get-ChildItem -Path $rootDirectory -File | Where-Object { $_.CreationTime -ge (Get-Date).AddHours(-$timespan) }
+    $lastCompletedDateAndTime = ((Get-ChildItem | Sort-Object CreationTime -Descending | Select-Object -First 1).CreationTime).ToString("yyyy-MM-dd HH:mm:ss tt")
 
     if ($recentCompletedFiles.Count -eq 0) {
-        Find-Recent -Time "$($timespan) hours"
+        Find-Recent -Timespan "$($timespan) hours" -DateAndTime $lastCompletedDateAndTime
     } 
 }
 catch {
     Send-Error -ScriptName $MyInvocation.MyCommand.Name -ErrorParam "$($Error[0].Exception.Message)"
 }
+
