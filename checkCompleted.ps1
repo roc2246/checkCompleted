@@ -19,7 +19,7 @@ else {
 try {
     $timespan = 3
     $recentCompletedFiles = Get-ChildItem -Path $rootDirectory -File | Where-Object { $_.CreationTime -ge (Get-Date).AddHours(-$timespan) }
-    $lastCompletedDateAndTime = ((Get-ChildItem -Path $rootDirectory -File| Sort-Object CreationTime -Descending | Select-Object -First 1).CreationTime).ToString("yyyy-MM-dd HH:mm:ss tt")
+    $lastCompletedDateAndTime = ((Get-ChildItem -Path $rootDirectory -File| Sort-Object CreationTime -Descending | Select-Object -First 1).CreationTime).ToString("yyyy-MM-dd hh:mm:ss tt")
 
     if ($recentCompletedFiles.Count -eq 0) {
         Find-Recent -Timespan "$($timespan) hours" -DateAndTime $lastCompletedDateAndTime
